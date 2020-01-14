@@ -65,7 +65,43 @@ citippy <- function(link,
                                   Vol {dplyr::filter(bib,BIBTEXKEY==link[x])$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link[x])$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
                                   <br>"
         )
-      }
+      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
+                                  <br>"
+        )
+      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
+                                  <br>"
+        )
+      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
+                                  <br>"
+        )
+      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
+                                  <br>"
+        )
+      } 
     }
     
     tooltip <- paste(unlist(purrr::map(seq(1:length(link)), tooltip_function)), collapse='')
