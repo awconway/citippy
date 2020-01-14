@@ -32,7 +32,7 @@ citippy <- function(link,
                            cite.style = cite_style
     )
     
-    tippy::tippy(text = RefManageR::Citep(bibref, link, .opts = list(super = TRUE)),
+    tippy::tippy(text = RefManageR::Citep(bibref, link),
                  interactive = TRUE,
                  tooltip = if(dplyr::filter(bib, BIBTEXKEY==link)$CATEGORY=="ARTICLE" & 
                               nrow(dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]])>3){
