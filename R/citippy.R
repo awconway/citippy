@@ -29,41 +29,54 @@ citippy <- function(link,
                            cite.style = cite_style
     )
     
-    tippy::tippy(text = RefManageR::Citep(bibref, link),
-                 interactive = TRUE,
-                 tooltip = if(dplyr::filter(bib, BIBTEXKEY==link)$CATEGORY=="ARTICLE" & 
-                              nrow(dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]])>3){
-                   glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link)$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[3]} et al.<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link)$JOURNAL},</em> 
-                                  Vol {dplyr::filter(bib,BIBTEXKEY==link)$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link)$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link)$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link)$YEAR}<br>
+    tooltip_function <- function(x){
+      
+      
+      
+      if(dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+         nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL},</em> 
+                                  Vol {dplyr::filter(bib,BIBTEXKEY==link[x])$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link[x])$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
                                   "
-                   )
-                 } else if (dplyr::filter(bib, BIBTEXKEY==link)$CATEGORY=="ARTICLE" & 
-                            nrow(dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]])==3){
-                   glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link)$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[3]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link)$JOURNAL},</em> 
-                                  Vol {dplyr::filter(bib,BIBTEXKEY==link)$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link)$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link)$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link)$YEAR}<br>
+        )
+      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL},</em> 
+                                  Vol {dplyr::filter(bib,BIBTEXKEY==link[x])$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link[x])$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
                                   "
-                   )
-                 } else if(dplyr::filter(bib, BIBTEXKEY==link)$CATEGORY=="ARTICLE" & 
-                           nrow(dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]])==2){
-                   glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link)$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[2]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link)$JOURNAL},</em> 
-                                  Vol {dplyr::filter(bib,BIBTEXKEY==link)$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link)$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link)$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link)$YEAR}<br>
+        )
+      } else if(dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+                nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL},</em> 
+                                  Vol {dplyr::filter(bib,BIBTEXKEY==link[x])$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link[x])$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
                                   "
-                   )
-                 } else if (dplyr::filter(bib, BIBTEXKEY==link)$CATEGORY=="ARTICLE" & 
-                            nrow(dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]])==1){
-                   glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link)$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]]$full_name[1]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link)$JOURNAL},</em> 
-                                  Vol {dplyr::filter(bib,BIBTEXKEY==link)$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link)$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link)$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link)$YEAR}<br>
+        )
+      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
+        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL},</em> 
+                                  Vol {dplyr::filter(bib,BIBTEXKEY==link[x])$VOLUME}({dplyr::filter(bib,BIBTEXKEY==link[x])$NUMBER}), pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}. {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
                                   "
-                   )
-                 }
+        )
+      }
+    }
+    
+    tooltip <- paste(unlist(purrr::map(seq(1:length(link)), tooltip_function)), collapse='')
+    
+    
+    tippy::tippy(text = RefManageR::Citep(bibref, link, 
+                                          .opts = list(
+                                            bibpunct = c("(", ")","[", "]", ","))
+    ),
+    interactive = TRUE,
+    tooltip = tooltip
     )
   }
   
