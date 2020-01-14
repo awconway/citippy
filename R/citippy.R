@@ -11,11 +11,9 @@
 #' @export
 #' 
 citippy <- function(link, 
-          ref = "references.bib", 
-          pandoc = params$pandoc, 
-          cite_style = "numeric"){
-  
-  library(RefManageR)
+                    ref = "references.bib", 
+                    pandoc = params$pandoc, 
+                    cite_style = "numeric"){
   
   bib <- bib2df::bib2df(ref, separate_names = TRUE)
   bibref <- RefManageR::ReadBib(ref)
@@ -28,7 +26,7 @@ citippy <- function(link,
   } else {
     
     RefManageR::BibOptions(style = "html", hyperlink = "to.doc",
-               cite.style = cite_style
+                           cite.style = cite_style
     )
     
     tippy::tippy(text = RefManageR::Citep(bibref, link),
