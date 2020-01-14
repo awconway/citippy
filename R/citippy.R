@@ -28,7 +28,7 @@ citippy <- function(link,
     
   } else {
     
-    RefManageR::BibOptions(style = "html", hyperlink = "to.doc",
+    RefManageR::BibOptions(style = "markdown", hyperlink = "to.doc",
                            super = TRUE, cite.style = cite_style
     )
     
