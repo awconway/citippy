@@ -28,11 +28,11 @@ citippy <- function(link,
     
   } else {
     
-    RefManageR::BibOptions(style = "markdown", hyperlink = "to.doc",
-                           super = TRUE, cite.style = cite_style
+    RefManageR::BibOptions(style = "html", hyperlink = "to.doc",
+                           cite.style = cite_style
     )
     
-    tippy::tippy(text = RefManageR::Citep(bibref, link),
+    tippy::tippy(text = RefManageR::Citep(bibref, link.opts = list(super = TRUE)),
                  interactive = TRUE,
                  tooltip = if(dplyr::filter(bib, BIBTEXKEY==link)$CATEGORY=="ARTICLE" & 
                               nrow(dplyr::filter(bib, BIBTEXKEY==link)$AUTHOR[[1]])>3){
