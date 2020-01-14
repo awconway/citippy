@@ -29,7 +29,7 @@ citippy <- function(link,
   } else {
     
     RefManageR::BibOptions(style = "html", hyperlink = "to.doc",
-               cite.style = cite.style
+               cite.style = cite_style
     )
     
     tippy::tippy(text = RefManageR::Citep(bibref, link),
