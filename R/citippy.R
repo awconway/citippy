@@ -1,5 +1,4 @@
 #' citippy
-
 #' @name citippy
 #' @rdname citippy
 #' 
