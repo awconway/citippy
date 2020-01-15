@@ -113,6 +113,7 @@ citippy <- function(link,
     ),
     interactive = TRUE,
     tooltip = tooltip
+    , size = "large"
     )
   }
   
