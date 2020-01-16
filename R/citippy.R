@@ -38,7 +38,7 @@ citippy <- function(link,
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                                   <br>"
         )
       } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
@@ -46,7 +46,7 @@ citippy <- function(link,
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
       } else if(dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
@@ -54,7 +54,7 @@ citippy <- function(link,
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
       } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
@@ -62,7 +62,7 @@ citippy <- function(link,
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
       } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
@@ -72,7 +72,7 @@ citippy <- function(link,
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
                                   Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
       } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
@@ -82,7 +82,7 @@ citippy <- function(link,
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
                                   Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
       } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
@@ -92,7 +92,7 @@ citippy <- function(link,
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
                                   Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
       } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
@@ -102,7 +102,7 @@ citippy <- function(link,
                                   <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
                                   Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}'>DOI Link</a>]
+                                  [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
       } 
