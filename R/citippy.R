@@ -37,7 +37,7 @@ citippy <- function(link,
          nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
                                   [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                                   <br>"
         )
@@ -45,7 +45,7 @@ citippy <- function(link,
                  nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
                                   [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
@@ -53,7 +53,7 @@ citippy <- function(link,
                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
                                   [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
@@ -61,7 +61,7 @@ citippy <- function(link,
                  nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
         glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> <br>
+                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
                                   [<a href='https://doi.org/{dplyr::filter(bib,BIBTEXKEY==link[x])$DOI}' target='_blank'>DOI Link</a>]
                    <br>"
         )
