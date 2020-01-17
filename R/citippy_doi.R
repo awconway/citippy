@@ -6,9 +6,7 @@
 #' @param doi doi string
 #' 
 #' @export
-#' @examples 
-#' 
-#' citippy_doi("10.1136/heartjnl-2013-305289")
+
 
 
 citippy_doi <- function(doi){

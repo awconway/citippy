@@ -13,7 +13,3 @@ citippy_doi(doi)
 \description{
 citippy_doi
 }
-\examples{
-
-citippy_doi("10.1136/heartjnl-2013-305289")
-}
