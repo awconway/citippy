@@ -1,7 +1,7 @@
 #' citippy_doi
 #' 
 #' @rdname citippy_doi
-#' @name citippy doi
+#' @name citippy
 #' 
 #' @param doi doi string
 #' 
