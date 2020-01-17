@@ -17,7 +17,7 @@ citippy_doi <- function(doi){
                       config = list(followlocation = TRUE),
                       httr::add_headers(Accept = "application/x-bibtex"))
     if (!httr::http_error(temp)){
-      clipr::write_clip(httr::content(temp, as = "text", encoding = "UTF-8"))
+      clipr::write_clip(httr::content(temp, as = "text", encoding = "UTF-8"), allow_non_interactive = TRUE)
       cat(httr::content(temp, as = "text", encoding = "UTF-8"))
       message("The bibtex entry above has been copied to your clipboard")
       successes[i] <- TRUE
