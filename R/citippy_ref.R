@@ -25,12 +25,15 @@ citippy_ref <- function(query, ref_path = "references.bib"){
   selection2 <- menu(c("Yes", "No"), title=glue::glue("Add to {ref_path}?"))
   if(selection2==TRUE){
     RefManageR::WriteBib(bibentry_selection, file = ref_path, append = TRUE)
-    #code to write in-line code to clipboard
-    # bib <- bib2df::bib2df(ref_path)
-    # print(glue::glue("`r citippy('{tail(bib$BIBTEXKEY, n=1)}')`"))
-    # selection3 <- menu(c("Yes", "No"), title="Add in-line code to clipboard?")
-    # if(selection3==TRUE){
-    #   clipr::write_clip(glue::glue("`r citippy('{tail(bib$BIBTEXKEY, n=1)}')`"))
-    # }
+    bib <- bib2df::bib2df(ref_path)
+    print(glue::glue("`r citippy('{tail(bib$BIBTEXKEY, n=1)}')`"))
+    selection3 <- menu(c("Yes", "No"), 
+    title="Add citation to current cursor position in active source editor?")
+    if(selection3==TRUE){
+      context <- rstudioapi::getSourceEditorContext()
+      id <- context$id
+      rstudioapi::insertText(text = glue::glue(
+        "`r citippy('{tail(bib$BIBTEXKEY, n=1)}')` "), id = id)
+    }
   }
 }

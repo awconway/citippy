@@ -25,5 +25,6 @@ Imports:
     purrr,
     rcrossref,
     tippy,
-    RefManageR
+    RefManageR,
+    rstudioapi
     
