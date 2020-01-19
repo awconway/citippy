@@ -1,17 +1,29 @@
 Package: citippy
-Title: What the Package Does (One Line, Title Case)
+Title: Citations with Tooltips
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Aaron",
            family = "Conway",
            role = c("aut", "cre"),
-           email = "aaron.conway@utoronto.ca",
-           comment = c(ORCID = "0000-0002-9583-8636"))
-Description: What the package does (one paragraph).
+           email = "aaronconwayphd@gmail.com",
+           comment = c(ORCID = ""))
+Description: 
+    Adds citations to rmarkdown documents that show the 
+    reference as a tooltip on hover instead of reference list when
+    knitting to html. Parameter to switch back to using pandoc when 
+    required.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
+URL: https://github.com/awconway/citippy, https://citippy.netlify.com
 RoxygenNote: 6.1.1
 Imports: 
-    magrittr
+    magrittr,
+    dplyr,
+    glue,
+    bib2df,
+    purrr,
+    rcrossref,
+    tippy,
+    RefManageR
+    

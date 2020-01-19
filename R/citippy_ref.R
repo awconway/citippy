@@ -1,15 +1,13 @@
-#' citippy_ref
+#' use crossref to find a citation and add to references.bib file
 #' 
 #' @rdname citippy_ref
 #' @name citippy_ref
 #' 
 #' @param query Search string
-#' 
-#' @example
-#' citippy_ref(query = "Midazolam for sedation before procedures")
+#' @param ref_path Default is references.bib
 #' @export
 
-citippy_ref <- function(query){
+citippy_ref <- function(query, ref_path = "references.bib"){
   
   res <- rcrossref::cr_works(query = query)
   res1 <- res$data %>% 
@@ -24,8 +22,15 @@ citippy_ref <- function(query){
   selection <- readline(prompt = "Select the reference you want:")
   bibentry_selection <- RefManageR::GetBibEntryWithDOI(res1[selection,]$doi)
   print(bibentry_selection)
-  selection2 <- menu(c("Yes", "No"), title="Add to references.bib?")
+  selection2 <- menu(c("Yes", "No"), title=glue::glue("Add to {ref_path}?"))
   if(selection2==TRUE){
-    RefManageR::WriteBib(bibentry_selection, append = TRUE)
+    RefManageR::WriteBib(bibentry_selection, file = ref_path, append = TRUE)
+    #code to write in-line code to clipboard
+    # bib <- bib2df::bib2df(ref_path)
+    # print(glue::glue("`r citippy('{tail(bib$BIBTEXKEY, n=1)}')`"))
+    # selection3 <- menu(c("Yes", "No"), title="Add in-line code to clipboard?")
+    # if(selection3==TRUE){
+    #   clipr::write_clip(glue::glue("`r citippy('{tail(bib$BIBTEXKEY, n=1)}')`"))
+    # }
   }
 }

@@ -1,22 +1,26 @@
-#' citippy
+#' add citation to rmarkdown document that will show as tooltip on hover
+#' 
 #' @name citippy
 #' @rdname citippy
 #' 
-#' @param ref path to .bib reference file
-#' @param pandoc logical but best to set as parameter in 
-#' rmarkdown yaml
-#' @param cite_style character string; bibliography style to use to 
-#' generate citations.  
+#' @param link Bibtex key
+#' @param ref_path Default is references.bib.
+#' @param pandoc Use pandoc to handle the citations and references (TRUE) or 
+#' display citations with tooltips showing references on hover (FALSE) in html 
+#' documents. Default is FALSE.
+#' @param cite_style Options for styling of in-text citations. Options are 
+#' "numeric", "authoryear". Default is set to "numeric".
+#' @param ... Additional arguments to pass to `tippy::tippy`
 #' 
 #' @export
 #' 
 citippy <- function(link, 
-                    ref = "references.bib", 
-                    pandoc = params$pandoc, 
-                    cite_style = "numeric"){
+                    ref_path = "references.bib", 
+                    pandoc = FALSE, 
+                    cite_style = "numeric", ...){
   
-  bib <- bib2df::bib2df(ref, separate_names = TRUE)
-  bibref <- RefManageR::ReadBib(ref)
+  bib <- bib2df::bib2df(ref_path, separate_names = TRUE)
+  bibref <- RefManageR::ReadBib(ref_path)
   
   if (pandoc==TRUE){
     
@@ -117,8 +121,9 @@ citippy <- function(link,
     ),
     interactive = TRUE,
     tooltip = tooltip
-    , size = "large"
+    , size = "large", ...
     )
   }
   
 }
+

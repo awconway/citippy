@@ -2,20 +2,25 @@
 % Please edit documentation in R/citippy.R
 \name{citippy}
 \alias{citippy}
-\title{citippy}
+\title{add citation to rmarkdown document that will show as tooltip on hover}
 \usage{
-citippy(link, ref = "references.bib", pandoc = params$pandoc,
-  cite_style = "numeric")
+citippy(link, ref_path = "references.bib", pandoc = FALSE,
+  cite_style = "numeric", ...)
 }
 \arguments{
-\item{ref}{path to .bib reference file}
+\item{link}{Bibtex key}
 
-\item{pandoc}{logical but best to set as parameter in
-rmarkdown yaml}
+\item{ref_path}{Default is references.bib.}
 
-\item{cite_style}{character string; bibliography style to use to
-generate citations.}
+\item{pandoc}{Use pandoc to handle the citations and references (TRUE) or 
+display citations with tooltips showing references on hover (FALSE) in html 
+documents. Default is FALSE.}
+
+\item{cite_style}{Options for styling of in-text citations. Options are 
+"numeric", "authoryear". Default is set to "numeric".}
+
+\item{...}{Additional arguments to pass to `tippy::tippy`}
 }
 \description{
-citippy
+add citation to rmarkdown document that will show as tooltip on hover
 }
