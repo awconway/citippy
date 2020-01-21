@@ -5,7 +5,7 @@
 \title{add citation to rmarkdown document that will show as tooltip on hover}
 \usage{
 citippy(link, ref_path = "references.bib", pandoc = FALSE,
-  cite_style = "numeric", ...)
+  cite_style = "numeric", textual = FALSE, ...)
 }
 \arguments{
 \item{link}{Bibtex key}

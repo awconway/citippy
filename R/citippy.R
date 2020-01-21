@@ -17,7 +17,8 @@
 citippy <- function(link, 
                     ref_path = "references.bib", 
                     pandoc = FALSE, 
-                    cite_style = "numeric", ...){
+                    cite_style = "numeric",
+                    textual = FALSE, ...){
   
   bib <- bib2df::bib2df(ref_path, separate_names = TRUE)
   bibref <- RefManageR::ReadBib(ref_path)
@@ -25,7 +26,8 @@ citippy <- function(link,
   if (pandoc==TRUE){
     
     RefManageR::BibOptions(cite.style = "pandoc")
-    RefManageR::Citet(bibref, link, .opts = list(cite.style = "pandoc"))
+    RefManageR::Cite(bibref, link, .opts = list(cite.style = "pandoc"),
+                     textual = textual)
     
   } else {
     
