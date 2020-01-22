@@ -80,7 +80,7 @@ paste_citation_keys <- function(keys, in_paren = FALSE) {
       )
     }
 
-    glue::glue("`r citippy(c('{keys}'), textual = TRUE)`")
+    glue::glue("`r citippy(c('{keys}'), textual = FALSE)`")
   }
 }
 
