@@ -18,7 +18,7 @@ citippy <- function(link,
                     ref_path = "references.bib", 
                     pandoc = FALSE, 
                     cite_style = "numeric",
-                    textual = FALSE, ...){
+                    textual, ...){
   
   bib <- bib2df::bib2df(ref_path, separate_names = TRUE)
   bibref <- RefManageR::ReadBib(ref_path)
