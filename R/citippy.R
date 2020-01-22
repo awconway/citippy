@@ -16,7 +16,7 @@
 #' 
 citippy <- function(link, 
                     ref_path = "references.bib", 
-                    pandoc = FALSE, 
+                    pandoc = params$pandoc, 
                     cite_style = "numeric",
                     textual = FALSE, ...){
   
