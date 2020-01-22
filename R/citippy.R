@@ -117,7 +117,7 @@ citippy <- function(link,
     tooltip <- paste(unlist(purrr::map(seq(1:length(link)), tooltip_function)), collapse='')
     
     
-    tippy::tippy(text = RefManageR::Citep(bibref, link, 
+    tippy::tippy(text = RefManageR::Cite(bibref, link, textual = textual,
                                           .opts = list(
                                             bibpunct = c("(", ")","[", "]", ","))
     ),
