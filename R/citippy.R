@@ -27,7 +27,7 @@ citippy <- function(link,
     
     RefManageR::BibOptions(cite.style = "pandoc")
     RefManageR::Cite(bibref, link, 
-                     # .opts = list(cite.style = "pandoc"),
+                     .opts = list(cite.style = "pandoc"),
                      textual = textual)
     
   } else {
