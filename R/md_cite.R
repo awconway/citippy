@@ -68,7 +68,7 @@ paste_citation_keys <- function(keys, in_paren = FALSE) {
 
   if(in_paren) {
     keys <- paste(keys, collapse = "', '")
-    glue::glue("`r citippy(c('{keys}'), textual = FALSE)`")
+    glue::glue("`r citippy(c('{keys}'))`")
   } else {
     if(n_keys == 2) {
       keys <- paste(keys, collapse = "', '")

@@ -18,17 +18,24 @@ citippy <- function(link,
                     ref_path = "references.bib", 
                     pandoc = FALSE, 
                     cite_style = "numeric",
-                    textual, ...){
+                    textual = FALSE, ...){
   
   bib <- bib2df::bib2df(ref_path, separate_names = TRUE)
   bibref <- RefManageR::ReadBib(ref_path)
   
-  if (pandoc==TRUE){
+  if (pandoc==TRUE & textual==FALSE){
     
     RefManageR::BibOptions(cite.style = "pandoc")
     RefManageR::Cite(bibref, link, 
                      .opts = list(cite.style = "pandoc"),
-                     textual = textual)
+                     textual = TRUE)
+    
+  } else if (pandoc==TRUE & textual==TRUE){
+    
+    RefManageR::BibOptions(cite.style = "pandoc")
+    RefManageR::Cite(bibref, link, 
+                     .opts = list(cite.style = "pandoc"),
+                     textual = FALSE)
     
   } else {
     
