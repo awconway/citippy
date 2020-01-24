@@ -4,7 +4,7 @@
 \alias{citippy}
 \title{add citation to rmarkdown document that will show as tooltip on hover}
 \usage{
-citippy(link, bibdf = bibdf, bibref = bibref, pandoc = FALSE,
+citippy(link, bibdf = bibdf, bibref = bibref, pandoc = params$pandoc,
   cite_style = "numeric", textual = FALSE, ...)
 }
 \arguments{
