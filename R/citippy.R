@@ -4,7 +4,8 @@
 #' @rdname citippy
 #' 
 #' @param link Bibtex key
-#' @param ref_path Default is references.bib.
+#' @param bibdf dataframe of bibentries returned by bib2df::bib2df
+#' @param bibref bibentries returned by RefManageR::ReadBib
 #' @param pandoc Use pandoc to handle the citations and references (TRUE) or 
 #' display citations with tooltips showing references on hover (FALSE) in html 
 #' documents. Default is FALSE.
@@ -15,13 +16,11 @@
 #' @export
 #' 
 citippy <- function(link, 
-                    ref_path = "references.bib", 
-                    pandoc = params$pandoc, 
+                    bibdf = bibdf,
+                    bibref = bibref,
+                    pandoc = FALSE, 
                     cite_style = "numeric",
                     textual = FALSE, ...){
-  
-  bib <- bib2df::bib2df(ref_path, separate_names = TRUE)
-  bibref <- RefManageR::ReadBib(ref_path)
   
   if (pandoc==TRUE & textual==FALSE){
     
@@ -47,76 +46,76 @@ citippy <- function(link,
       
       
       
-      if(dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
-         nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+         nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                                   <br>"
         )
-      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
-                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if(dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
-                nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      } else if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+                nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
-                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR})<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="ARTICLE" & 
+                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$JOURNAL}</em> ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
-                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
-                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bibdf,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bibdf,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR}<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
-                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
-                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bibdf,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bibdf,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR}<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
-                 nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
-                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bibdf,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bibdf,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR}<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if (dplyr::filter(bib, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
-                nrow(dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
-        glue::glue("<strong>{dplyr::filter(bib, BIBTEXKEY==link[x])$TITLE}</strong><br>
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
-                                  <em>{dplyr::filter(bib,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
-                                  Chapter {dplyr::filter(bib,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bib,BIBTEXKEY==link[x])$PAGES}.
-                                  {dplyr::filter(bib, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bib, BIBTEXKEY==link[x])$YEAR}<br>
-                                  [<a href='{dplyr::filter(bib,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="BOOK" & 
+                nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
+                                  <em>{dplyr::filter(bibdf,BIBTEXKEY==link[x])$BOOKTITLE},</em> 
+                                  Chapter {dplyr::filter(bibdf,BIBTEXKEY==link[x])$CHAPTER}, pp. {dplyr::filter(bibdf,BIBTEXKEY==link[x])$PAGES}.
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$PUBLISHER}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR}<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
       } 
