@@ -3,6 +3,7 @@
 export("%>%")
 export(citippy)
 export(citippy_options)
+export(citippy_path)
 export(citippy_ref)
 export(insert_citation)
 export(load_betterbiblatex_bib)
