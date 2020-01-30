@@ -22,7 +22,7 @@ citippy <- function(link,
                     cite_style = "numeric",
                     textual = FALSE, ...){
   
-  pandoc <- cittipy_options()$pandoc
+  pandoc <- citippy_options()$pandoc
   
   if (pandoc==TRUE & textual==FALSE){
     
