@@ -16,13 +16,13 @@
 #' @export
 #' 
 citippy <- function(link, 
-                    bibdf = bibdf,
-                    bibref = bibref,
                     pandoc, 
                     cite_style = "numeric",
                     textual = FALSE, ...){
   
   pandoc <- citippy_options()$pandoc
+  bibdf <-  citippy_options()$bibdf
+  bibref <-  citippy_options()$bibref
   
   if (pandoc==TRUE & textual==FALSE){
     

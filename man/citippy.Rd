@@ -4,15 +4,10 @@
 \alias{citippy}
 \title{add citation to rmarkdown document that will show as tooltip on hover}
 \usage{
-citippy(link, bibdf = bibdf, bibref = bibref, pandoc,
-  cite_style = "numeric", textual = FALSE, ...)
+citippy(link, pandoc, cite_style = "numeric", textual = FALSE, ...)
 }
 \arguments{
 \item{link}{Bibtex key}
-
-\item{bibdf}{dataframe of bibentries returned by bib2df::bib2df}
-
-\item{bibref}{bibentries returned by RefManageR::ReadBib}
 
 \item{pandoc}{Use pandoc to handle the citations and references (TRUE) or 
 display citations with tooltips showing references on hover (FALSE) in html 
@@ -22,6 +17,10 @@ documents. Default is FALSE.}
 "numeric", "authoryear". Default is set to "numeric".}
 
 \item{...}{Additional arguments to pass to `tippy::tippy`}
+
+\item{bibdf}{dataframe of bibentries returned by bib2df::bib2df}
+
+\item{bibref}{bibentries returned by RefManageR::ReadBib}
 }
 \description{
 add citation to rmarkdown document that will show as tooltip on hover

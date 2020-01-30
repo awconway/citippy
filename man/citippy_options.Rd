@@ -4,7 +4,7 @@
 \alias{citippy_options}
 \title{Set options/hooks for RefManageR}
 \usage{
-citippy_options(..., restore.defaults = FALSE)
+citippy_options(..., ref_path, restore.defaults = FALSE)
 }
 \arguments{
 \item{...}{a character vector or strings specifying option names to access; or to set options values, 
