@@ -16,8 +16,6 @@
 #' @export
 #' 
 citippy <- function(link, 
-                    bibdf = bibdf,
-                    bibref = bibref,
                     pandoc, 
                     cite_style = "numeric",
                     textual = FALSE, ...){
