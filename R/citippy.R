@@ -18,9 +18,11 @@
 citippy <- function(link, 
                     bibdf = bibdf,
                     bibref = bibref,
-                    pandoc = params$pandoc, 
+                    pandoc, 
                     cite_style = "numeric",
                     textual = FALSE, ...){
+  
+  pandoc <- cittipy_options()$pandoc
   
   if (pandoc==TRUE & textual==FALSE){
     
