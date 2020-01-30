@@ -113,7 +113,7 @@
 #' citippy_options(oldopts)
 #' 
 #' citippy_options(restore.defaults = TRUE)
-citippy_options <- function(..., ref_path, restore.defaults = FALSE){
+citippy_options <- function(..., restore.defaults = FALSE){
   if (restore.defaults)
     return(invisible(mapply(assign, .BibOptNames, .Defaults,
                             MoreArgs = list(envir=.citippy_options))))
@@ -147,8 +147,6 @@ citippy_options <- function(..., ref_path, restore.defaults = FALSE){
     mapply(assign, nom, opts, MoreArgs = list(envir=.citippy_options))
     invisible(oldopts)
   }
-  bibdf <- bib2df::bib2df(ref_path, separate_names = TRUE)
-  bibref <- RefManageR::ReadBib(ref_path)
 }
 
 .Defaults <- list(pandoc = FALSE)
