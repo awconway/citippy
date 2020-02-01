@@ -149,16 +149,10 @@ citippy_options <- function(..., restore.defaults = FALSE){
   }
 }
 
-.Defaults <- list(pandoc = FALSE,
-                  ref_path = "references.bib")
-.bibdf <- bib2df::bib2df(.Defaults$ref_path, separate_names = TRUE)
-.bibref <- RefManageR::ReadBib(.Defaults$ref_path)
-.Defaults$bibdf <- .bibdf
-.Defaults$biref <- .bibref
+.Defaults <- list(pandoc = FALSE)
 .citippy_options <- list2env(.Defaults)
 .BibOptNames <- names(.Defaults)
-.LogicalBibOptNames <- c("return.ind", "first.inits", "dashed", "use.regex",
-                         "ignore.case", "longnamesfirst", "super")
+.LogicalBibOptNames <- c("pandoc")
 .cites <- new.env()
 assign("indices", logical(0), .cites)
 assign("labs", character(0), .cites)
