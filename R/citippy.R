@@ -21,6 +21,8 @@ citippy <- function(link,
                     textual = FALSE, ...){
   
   pandoc <- citippy_options()$pandoc
+  bibdf <- citippy_options()$bibdf
+  bibref <- citippy_options()$bibref
   
   if (pandoc==TRUE & textual==FALSE){
     

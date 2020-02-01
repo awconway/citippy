@@ -149,7 +149,12 @@ citippy_options <- function(..., restore.defaults = FALSE){
   }
 }
 
-.Defaults <- list(pandoc = FALSE)
+.Defaults <- list(pandoc = FALSE,
+                  ref_path = "references.bib")
+.bibdf <- bib2df::bib2df(.Defaults$ref_path, separate_names = TRUE)
+.bibref <- RefManageR::ReadBib(.Defaults$ref_path)
+.Defaults$bibdf <- .bibdf
+.Defaults$biref <- .bibref
 .citippy_options <- list2env(.Defaults)
 .BibOptNames <- names(.Defaults)
 .LogicalBibOptNames <- c("return.ind", "first.inits", "dashed", "use.regex",
