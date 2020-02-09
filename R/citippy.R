@@ -126,7 +126,7 @@ citippy <- function(link,
     
     tippy::tippy(text = RefManageR::Cite(bibref, link, textual = textual,
                                           .opts = list(
-                                            bibpunct = c("(", ")","[", "]", ","))
+                                            bibpunct = c("(", ")","<sup>", "</sup>", ","))
     ),
     interactive = TRUE,
     tooltip = tooltip
