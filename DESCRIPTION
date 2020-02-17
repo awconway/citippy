@@ -1,4 +1,5 @@
 Package: citippy
+Repository: local-cran
 Title: Citations with Tooltips
 Version: 0.0.0.9000
 Authors@R: 
