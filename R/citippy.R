@@ -118,7 +118,7 @@ citippy <- function(link,
                                   [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+      } else if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="MISC" & 
            nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
         glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
@@ -126,7 +126,7 @@ citippy <- function(link,
                                   [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                                   <br>"
         )
-      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="MISC" & 
                  nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
         glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
@@ -134,7 +134,7 @@ citippy <- function(link,
                                   [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+      } else if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="MISC" & 
                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
         glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
@@ -142,7 +142,7 @@ citippy <- function(link,
                                   [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="MISC" & 
                  nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
         glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
                                   {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
