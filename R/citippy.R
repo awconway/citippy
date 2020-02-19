@@ -16,11 +16,11 @@
 #' @export
 #' 
 citippy <- function(link, 
-                    bibdf = bibdf,
-                    bibref = bibref,
-                    pandoc = params$pandoc, 
+                    pandoc, 
                     cite_style = "numeric",
                     textual = FALSE, ...){
+  
+  pandoc <- citippy_options()$pandoc
   
   if (pandoc==TRUE & textual==FALSE){
     
@@ -118,15 +118,47 @@ citippy <- function(link,
                                   [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
                    <br>"
         )
-      } 
+      } else if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+           nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])>3){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]} et al.<br>
+                                  ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+                                  <br>"
+        )
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==3){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}, {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[3]}<br>
+                                  ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+                   <br>"
+        )
+      } else if(dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+                nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==2){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]} & {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[2]}<br>
+                                  ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+                   <br>"
+        )
+      } else if (dplyr::filter(bibdf, BIBTEXKEY==link[x])$CATEGORY=="DATASET" & 
+                 nrow(dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]])==1){
+        glue::glue("<strong>{dplyr::filter(bibdf, BIBTEXKEY==link[x])$TITLE}</strong><br>
+                                  {dplyr::filter(bibdf, BIBTEXKEY==link[x])$AUTHOR[[1]]$full_name[1]}<br>
+                                  ({dplyr::filter(bibdf, BIBTEXKEY==link[x])$YEAR})<br>
+                                  [<a href='{dplyr::filter(bibdf,BIBTEXKEY==link[x])$URL}' target='_blank'>Link</a>]
+                   <br>"
+        )
+      }
     }
     
     tooltip <- paste(unlist(purrr::map(seq(1:length(link)), tooltip_function)), collapse='')
     
     
     tippy::tippy(text = RefManageR::Cite(bibref, link, textual = textual,
-                                          .opts = list(
-                                            bibpunct = c("(", ")","[", "]", ","))
+                                         .opts = list(
+                                           bibpunct = c("(", ")","<sup>", "</sup>", ","))
     ),
     interactive = TRUE,
     tooltip = tooltip
